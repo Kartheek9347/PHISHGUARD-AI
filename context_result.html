@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Context Result - PhishGuard AI</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">🛡️ PhishGuard AI</div>
+
+    <div class="nav-links">
+        <a href="/" class="active">Home</a>
+        <a href="/features">Features</a>
+        <a href="/about">About</a>
+
+        {% if session.get('user') %}
+            <div class="user-menu">
+                <div class="user-btn" onclick="toggleMenu()">
+                    👤 {{ session['user'] }}
+                </div>
+
+                <div class="dropdown" id="dropdownMenu">
+                    <a href="/contact">Contact</a>
+                    <a href="/logout">Logout</a>
+                </div>
+            </div>
+        {% else %}
+            <a href="/signin">Sign In</a>
+        {% endif %}
+    </div>
+</div>
+
+<!-- RESULT -->
+<div class="container">
+    <div class="result-card">
+
+        <h2>🧠 Context Analysis Result</h2>
+
+        <!-- INTENT -->
+        <div class="score">{{ result.intent }}</div>
+
+        <!-- RISK -->
+        <div class="badge 
+        {% if result.risk == 'High' %}high
+        {% elif result.risk == 'Medium' %}medium
+        {% else %}low{% endif %}">
+        {{ result.risk }}
+        </div>
+
+        <p style="margin-top: 15px;">
+            This analysis explains the intent behind the email content.
+        </p>
+
+    </div>
+</div>
+
+<!-- CONTEXT DETAILS -->
+<div class="extra-section">
+
+    <h2>Detected Context</h2>
+
+    <ul class="recommend-list">
+        {% for item in result.context %}
+            <li>⚠️ {{ item }}</li>
+        {% endfor %}
+    </ul>
+
+</div>
+
+<!-- RISK BREAKDOWN -->
+<div class="extra-section">
+
+<h2>Context Risk Breakdown</h2>
+
+<div class="risk-grid">
+
+    <div class="risk-box">
+        <h4>Intent Strength</h4>
+        <div class="bar">
+            <div class="fill" style="width: {{ result.score }}%"></div>
+        </div>
+    </div>
+
+    <div class="risk-box">
+        <h4>Manipulation Level</h4>
+        <div class="bar">
+            <div class="fill" style="width: {{ result.score * 0.7 }}%"></div>
+        </div>
+    </div>
+
+    <div class="risk-box">
+        <h4>Overall Context Risk</h4>
+        <div class="bar">
+            <div class="fill" style="width: {{ result.score }}%"></div>
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+<!-- RECOMMENDATIONS -->
+<div class="extra-section">
+
+<h2>Recommended Actions</h2>
+
+<ul class="recommend-list">
+
+{% if result.risk == "High" %}
+    <li>⚠️ Do not trust this email</li>
+    <li>⚠️ Avoid clicking links</li>
+    <li>⚠️ Verify sender manually</li>
+
+{% elif result.risk == "Medium" %}
+    <li>⚠️ Be cautious</li>
+    <li>✔ Verify before action</li>
+
+{% else %}
+    <li>✔ No strong threat detected</li>
+{% endif %}
+
+</ul>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+© 2026 PhishGuard AI • Capstone Project
+</div>
+<script>
+function toggleMenu() {
+    const menu = document.getElementById("dropdownMenu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+window.onclick = function(event) {
+    if (!event.target.closest('.user-menu')) {
+        const menu = document.getElementById("dropdownMenu");
+        if(menu) menu.style.display = "none";
+    }
+}
+</script>
+</body>
+</html>

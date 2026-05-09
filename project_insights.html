@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Project Insights</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="logo">🛡️ PhishGuard AI</div>
+
+    <div class="nav-links">
+        <a href="/" class="active">Home</a>
+        <a href="/features">Features</a>
+        <a href="/about">About</a>
+
+        {% if session.get('user') %}
+            <div class="user-menu">
+                <div class="user-btn" onclick="toggleMenu()">
+                    👤 {{ session['user'] }}
+                </div>
+
+                <div class="dropdown" id="dropdownMenu">
+                    <a href="/contact">Contact</a>
+                    <a href="/logout">Logout</a>
+                </div>
+            </div>
+        {% else %}
+            <a href="/signin">Sign In</a>
+        {% endif %}
+    </div>
+</div>
+
+
+<div class="container">
+
+    <!-- ================= ARCHITECTURE ================= -->
+    <h2 class="section-title">Project Architecture</h2>
+    <img src="{{ url_for('static', filename='images/architecture.png') }}" class="doc-image">
+
+
+    <!-- ================= SYSTEM OVERVIEW ================= -->
+    <h2 class="section-title">System Overview</h2>
+
+    <div class="dual-container">
+
+        <!-- FLOWCHART -->
+        <div class="box flow-box">
+<pre>
+User Input
+   ↓
+Frontend (HTML/CSS)
+   ↓
+Flask Backend (app.py)
+   ↓
+Input Validation
+   ↓
+NLP Preprocessing
+   ↓
+Feature Extraction
+   ↓
+ML Model (model.pkl)
+   ↓
+Risk Scoring
+   ↓
+Context Engine
+   ↓
+Response Generation
+   ↓
+Frontend Display
+   ↓
+Database Storage
+</pre>
+        </div>
+
+        <!-- DATASET -->
+        <div class="box dataset-box">
+            <table class="dataset-table">
+                <thead>
+                    <tr>
+                        <th>Dataset Name</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr><td>Phishing Email Dataset</td><td>Training phishing examples</td></tr>
+                    <tr><td>Enron Dataset</td><td>Legitimate corporate emails</td></tr>
+                    <tr><td>SpamAssassin Dataset</td><td>Spam detection patterns</td></tr>
+                    <tr><td>CEAS 2008 Dataset</td><td>Email classification dataset</td></tr>
+                    <tr><td>Nigerian Fraud Dataset</td><td>Scam-style phishing emails</td></tr>
+                    <tr><td>Nazario Phishing Dataset</td><td>Real-world phishing URLs/emails</td></tr>
+                    <tr class="highlight-row">
+                        <td><b>Final Dataset</b></td>
+                        <td><b>Combined dataset used for model training</b></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+    <!-- ================= PROJECT MODULES (FOOTER STYLE) ================= -->
+    <h2 class="section-title">Project Modules</h2>
+
+    <div class="final-table">
+
+        <table>
+            <tr>
+                <th>File</th>
+                <th>Purpose</th>
+            </tr>
+
+            <tr><td>app.py</td><td>Main backend controller</td></tr>
+            <tr><td>threat_predictor.py</td><td>Loads model.pkl & predicts</td></tr>
+            <tr><td>feature_intelligence.py</td><td>Extracts features</td></tr>
+            <tr><td>url_analyzer.py</td><td>URL pattern detection</td></tr>
+            <tr><td>context_engine.py</td><td>Intent analysis</td></tr>
+            <tr><td>database_handler.py</td><td>Stores results</td></tr>
+            <tr><td>train_model.py</td><td>Model training</td></tr>
+            <tr><td>create_dataset.py</td><td>Dataset merging</td></tr>
+        </table>
+
+    </div>
+
+
+    <!-- ================= DOCUMENTS ================= -->
+    <h2 class="section-title">Documents</h2>
+
+    <div class="doc-links">
+        <a href="{{ url_for('static', filename='docs/research_paper.docx') }}">📄 Research Paper</a>
+        <a href="{{ url_for('static', filename='docs/patent.docx') }}">📄 Patent Document</a>
+    </div>
+
+</div>
+
+
+<script>
+function toggleMenu() {
+    const menu = document.getElementById("dropdownMenu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+window.onclick = function(event) {
+    if (!event.target.closest('.user-menu')) {
+        const menu = document.getElementById("dropdownMenu");
+        if(menu) menu.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>

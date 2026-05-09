@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About - PhishGuard AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+    <div class="logo">🛡️ PhishGuard AI</div>
+
+    <div class="nav-links">
+        <a href="/" class="active">Home</a>
+        <a href="/features">Features</a>
+        <a href="/about">About</a>
+
+        {% if session.get('user') %}
+            <div class="user-menu">
+                <div class="user-btn" onclick="toggleMenu()">
+                    👤 {{ session['user'] }}
+                </div>
+
+                <div class="dropdown" id="dropdownMenu">
+                    <a href="/contact">Contact</a>
+                    <a href="/logout">Logout</a>
+                </div>
+            </div>
+        {% else %}
+            <a href="/signin">Sign In</a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="result-extra-wrapper">
+
+    <h2 class="result-title">About PhishGuard AI</h2>
+
+    <div class="result-grid">
+
+        <div class="result-box">
+            <div class="result-icon">🧠</div>
+            <h4>Project Overview</h4>
+            <p>
+                PhishGuard AI is an intelligent phishing detection system developed as a capstone project.
+                It detects phishing emails and malicious URLs using a hybrid AI approach combining 
+                Machine Learning and rule-based analysis.
+            </p>
+        </div>
+
+        <div class="result-box">
+            <div class="result-icon">⚙️</div>
+            <h4>Core AI Model</h4>
+            <p>
+                Uses <b>Logistic Regression</b> trained on <b>TF-IDF vectorized data</b> 
+                to classify phishing emails. The model predicts phishing probability 
+                based on textual patterns.
+            </p>
+        </div>
+
+        <div class="result-box">
+            <div class="result-icon">📊</div>
+            <h4>NLP & Context Engine</h4>
+            <p>
+                Applies Natural Language Processing to detect urgency, threats, 
+                and manipulation patterns commonly found in phishing emails.
+            </p>
+        </div>
+
+        <div class="result-box">
+            <div class="result-icon">🔗</div>
+            <h4>Hybrid Detection System</h4>
+            <p>
+                Combines ML predictions with rule-based scoring to improve 
+                accuracy and reduce false positives.
+            </p>
+        </div>
+
+        <div class="result-box">
+            <div class="result-icon">🎯</div>
+            <h4>Objective</h4>
+            <p>
+                Provide a fast, reliable, and explainable phishing detection 
+                system for real-world cybersecurity applications.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- 🔥 TECHNOLOGIES -->
+    <h2 class="result-title">Technologies Used</h2>
+
+    <div class="result-grid">
+
+        <div class="result-box">
+            <div class="result-icon">🖥️</div>
+            <h4>Backend</h4>
+            <p>
+                Python, Flask, SQLite, Jinja2
+            </p>
+        </div>
+
+        <div class="result-box">
+            <div class="result-icon">🤖</div>
+            <h4>AI / Machine Learning</h4>
+            <p>
+                Logistic Regression <br>
+                TF-IDF Vectorization <br>
+                Scikit-learn <br>
+                Joblib Model Persistence
+            </p>
+        </div>
+
+        <div class="result-box">
+            <div class="result-icon">📊</div>
+            <h4>Data Processing</h4>
+            <p>
+                NumPy, Pandas, Regex (re)
+            </p>
+        </div>
+
+        <div class="result-box">
+            <div class="result-icon">🌐</div>
+            <h4>Frontend</h4>
+            <p>
+                HTML5, CSS3, JavaScript
+            </p>
+        </div>
+
+        <div class="result-box">
+            <div class="result-icon">🔐</div>
+            <h4>Authentication</h4>
+            <p>
+                Flask Sessions for login & user management
+            </p>
+        </div>
+
+    </div>
+
+    <!-- 🔥 SYSTEM MODULES -->
+    <h2 class="result-title">System Modules</h2>
+
+    <div class="result-grid">
+
+        <div class="result-box">
+            <h4>Threat Predictor</h4>
+            <p>ML model that predicts phishing probability using Logistic Regression.</p>
+        </div>
+
+        <div class="result-box">
+            <h4>URL Analyzer</h4>
+            <p>Detects suspicious URL patterns (IP usage, long URLs, HTTP).</p>
+        </div>
+
+        <div class="result-box">
+            <h4>Context Engine</h4>
+            <p>Analyzes intent like urgency, threats, manipulation.</p>
+        </div>
+
+        <div class="result-box">
+            <h4>Feature Intelligence</h4>
+            <p>Extracts features like URL length, symbols, keywords.</p>
+        </div>
+
+        <div class="result-box">
+            <h4>Behavioral Engine</h4>
+            <p>Analyzes webpage behavior (redirects, scripts).</p>
+        </div>
+
+        <div class="result-box">
+            <h4>Explainable AI</h4>
+            <p>Provides reasons behind predictions.</p>
+        </div>
+
+        <div class="result-box">
+            <h4>Database Handler</h4>
+            <p>Stores user data and scan results in SQLite.</p>
+        </div>
+
+        <div class="result-box">
+            <h4>Continuous Learning</h4>
+            <p>Retrains model using stored data (future enhancement).</p>
+        </div>
+
+    </div>
+
+</div>
+<script>
+function toggleMenu() {
+    const menu = document.getElementById("dropdownMenu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+window.onclick = function(event) {
+    if (!event.target.closest('.user-menu')) {
+        const menu = document.getElementById("dropdownMenu");
+        if(menu) menu.style.display = "none";
+    }
+}
+</script>
+</body>
+</html>

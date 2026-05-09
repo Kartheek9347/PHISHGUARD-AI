@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Features - PhishGuard AI</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">🛡️ PhishGuard AI</div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/features" class="active">Features</a>
+        <a href="/about">About</a>
+
+        {% if session.get('user') %}
+            <div class="user-menu">
+                <div class="user-btn" onclick="toggleMenu()">
+                    👤 {{ session['user'] }}
+                </div>
+                <div class="dropdown" id="dropdownMenu">
+                    <a href="/contact">Contact</a>
+                    <a href="/logout">Logout</a>
+                </div>
+            </div>
+        {% else %}
+            <a href="/signin">Sign In</a>
+        {% endif %}
+    </div>
+</div>
+
+<!-- 🔥 MAIN SECTION -->
+<div class="result-extra-wrapper">
+
+    <h2 class="result-title">System Features</h2>
+
+    <div class="result-grid">
+
+        <div class="result-box">
+            <div class="result-icon">🔗</div>
+            <h4>URL Intelligence</h4>
+            <p>Detects malicious links, suspicious domains, and phishing patterns.</p>
+        </div>
+
+        <div class="result-box">
+            <div class="result-icon">🧠</div>
+            <h4>Context Engine</h4>
+            <p>Understands email intent using NLP to detect urgency and threats.</p>
+        </div>
+
+        <div class="result-box">
+            <div class="result-icon">🛡️</div>
+            <h4>Risk Engine</h4>
+            <p>Combines multiple signals into a final phishing score.</p>
+        </div>
+
+        <div class="result-box">
+            <div class="result-icon">📊</div>
+            <h4>Behavioral Analysis</h4>
+            <p>Detects abnormal writing patterns and suspicious behavior.</p>
+        </div>
+
+        <div class="result-box">
+            <div class="result-icon">⚙️</div>
+            <h4>Feature Intelligence</h4>
+            <p>Extracts URL patterns, keywords, and structural signals.</p>
+        </div>
+
+        <div class="result-box">
+    <div class="result-icon">🎯</div>
+    <h4>Threat Predictor</h4>
+    <p>Combines Machine Learning and rule-based logic to calculate phishing probability with high accuracy.</p>
+</div>
+
+        <div class="result-box">
+    <div class="result-icon">📊</div>
+    <h4>Smart Scoring System</h4>
+    <p>Dynamically adjusts risk scores using contextual signals, behavioral patterns, and weighted rules.</p>
+</div>
+
+        <div class="result-box">
+            <div class="result-icon">🔍</div>
+            <h4>Explainable AI</h4>
+            <p>Shows reasons behind predictions.</p>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+© 2026 PhishGuard AI • Capstone Project
+</div>
+
+<script>
+function toggleMenu() {
+    const menu = document.getElementById("dropdownMenu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+window.onclick = function(event) {
+    if (!event.target.closest('.user-menu')) {
+        const menu = document.getElementById("dropdownMenu");
+        if(menu) menu.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>

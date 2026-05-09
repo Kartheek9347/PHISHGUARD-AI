@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<title>PhishGuard AI</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="logo">🛡️ PhishGuard AI</div>
+
+    <div class="nav-links">
+        <a href="/" class="active">Home</a>
+        <a href="/features">Features</a>
+        <a href="/about">About</a>
+
+        {% if session.get('user') %}
+            <div class="user-menu">
+                <div class="user-btn" onclick="toggleMenu()">
+                    👤 {{ session['user'] }}
+                </div>
+
+                <div class="dropdown" id="dropdownMenu">
+                    <a href="/contact">Contact</a>
+                    <a href="/logout">Logout</a>
+                </div>
+            </div>
+        {% else %}
+            <a href="/signin">Sign In</a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="main">
+    <div class="card">
+        <h1>Adaptive Multi-Layer Phishing Detection</h1>
+        <p>Analyze emails using AI-driven structural, behavioral & contextual intelligence.</p>
+
+
+    <form method="POST" action="/analyze">
+        <textarea name="email" required placeholder="Paste or type email content here..."></textarea>
+        <br>
+        <button type="submit">🔍 Analyze Threat</button>
+    </form>
+</div>
+
+
+</div>
+<!-- FEATURES SECTION -->
+
+<div class="features-section">
+
+
+<a href="/url" class="feature-link">
+    <div class="feature-box">
+        <div class="feature-icon">🔗</div>
+        <h3>URL Intelligence</h3>
+        <p>Detect and analyze suspicious links and malicious patterns.</p>
+    </div>
+</a>
+
+<a href="/context" class="feature-box">
+    <div class="feature-icon">🧠</div>
+    <h3>Context Engine</h3>
+    <p>Understands email intent using NLP-based models.</p>
+</a>
+
+<a href="/project-insights" class="feature-link">
+    <div class="feature-box">
+        <div class="feature-icon">🗂️</div>
+        <h3>Project Insights</h3>
+        <p>Explore architecture, workflows, research and system design.</p>
+    </div>
+</a>
+
+
+</div>
+
+
+<div class="footer">
+© 2026 PhishGuard AI
+</div>
+<script>
+function toggleMenu() {
+    const menu = document.getElementById("dropdownMenu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+// Close when clicking outside
+window.onclick = function(event) {
+    if (!event.target.closest('.user-menu')) {
+        document.getElementById("dropdownMenu").style.display = "none";
+    }
+}
+</script>
+</body>
+</html>

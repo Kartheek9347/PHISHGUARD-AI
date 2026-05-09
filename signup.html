@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sign Up</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<!-- Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="auth-page"> <!-- ✅ SAME CLASS -->
+
+<div class="navbar">
+    <div class="logo">🛡️ PhishGuard AI</div>
+
+    <div class="nav-links">
+        <a href="/" class="active">Home</a>
+        <a href="/features">Features</a>
+        <a href="/about">About</a>
+
+        {% if session.get('user') %}
+            <div class="user-menu">
+                <div class="user-btn" onclick="toggleMenu()">
+                    👤 {{ session['user'] }}
+                </div>
+
+                <div class="dropdown" id="dropdownMenu">
+                    <a href="/contact">Contact</a>
+                    <a href="/logout">Logout</a>
+                </div>
+            </div>
+        {% else %}
+            <a href="/signin">Sign In</a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="main">
+    <div class="card">
+
+        <h2>Create Account</h2>
+        <p class="subtitle">Join PhishGuard AI and stay protected</p>
+
+        <form method="POST">
+
+            <!-- USERNAME -->
+            <div class="form-group">
+                <i class="fa fa-user icon"></i>
+                <input type="text" name="username" placeholder="Username" required>
+            </div>
+
+            <!-- PASSWORD -->
+            <div class="form-group">
+                <i class="fa fa-lock icon"></i>
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+
+            <!-- BUTTON -->
+            <button type="submit" class="login-btn">Sign Up</button>
+
+        </form>
+
+        <p class="signup-text">
+            Already have an account? <a href="/signin">Sign In</a>
+        </p>
+
+    </div>
+</div>
+
+<!-- DROPDOWN SCRIPT -->
+<script>
+function toggleMenu() {
+    const menu = document.getElementById("dropdownMenu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+window.onclick = function(event) {
+    if (!event.target.closest('.user-menu')) {
+        const menu = document.getElementById("dropdownMenu");
+        if(menu) menu.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>

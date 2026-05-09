@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact - PhishGuard AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- NAVBAR (same as your other pages) -->
+<div class="navbar">
+    <div class="logo">🛡️ PhishGuard AI</div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/features">Features</a>
+        <a href="/about">About</a>
+
+        {% if session.get('user') %}
+            <div class="user-menu">
+                <div class="user-btn" onclick="toggleMenu()">
+                    👤 {{ session['user'] }}
+                </div>
+
+                <div class="dropdown" id="dropdownMenu">
+                    <a href="/contact">Contact</a>
+                    <a href="/logout">Logout</a>
+                </div>
+            </div>
+        {% else %}
+            <a href="/signin">Sign In</a>
+        {% endif %}
+    </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+    <h2 class="section-title">Contact Information</h2>
+
+    <div class="contact-box">
+
+        <!-- UNIVERSITY -->
+        <div class="contact-section">
+            <h3>🏫 Institution</h3>
+            <p>Lovely Professional University</p>
+        </div>
+
+        <!-- TEAM MEMBERS -->
+        <div class="contact-section">
+            <h3>👨‍💻 Team Members</h3>
+
+            <div class="member">
+                <p><b>Mallareddy Venkata Sai Karteek</b></p>
+                <p>Reg No: 12216675</p>
+                <p>Email: mallareddykartheek@gmail.com</p>
+            </div>
+
+            <div class="member">
+                <p><b>Piyush Kumar Pandey</b></p>
+                <p>Reg No: 12206935</p>
+                <p>Email: pandeypiyush782003@gmail.com</p>
+            </div>
+
+            <div class="member">
+                <p><b>Tanuj</b></p>
+                <p>Reg No: 12221597</p>
+                <p>Email: ytanuj831@gmail.com</p>
+            </div>
+
+            <div class="member">
+                <p><b>V.V.V. Satyanarayana</b></p>
+                <p>Reg No: 12224207</p>
+                <p>Email: satyanarayanaveeravenkata24@gmail.com</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+function toggleMenu() {
+    const menu = document.getElementById("dropdownMenu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+window.onclick = function(event) {
+    if (!event.target.closest('.user-menu')) {
+        const menu = document.getElementById("dropdownMenu");
+        if(menu) menu.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>

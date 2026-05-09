@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>URL Intelligence - PhishGuard AI</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">🛡️ PhishGuard AI</div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/features">Features</a>
+        <a href="/about">About</a>
+
+        {% if session.get('user') %}
+            <div class="user-menu">
+                <div class="user-btn" onclick="toggleMenu()">
+                    👤 {{ session['user'] }}
+                </div>
+
+                <div class="dropdown" id="dropdownMenu">
+                    <a href="/contact">Contact</a>
+                    <a href="/logout">Logout</a>
+                </div>
+            </div>
+        {% else %}
+            <a href="/signin">Sign In</a>
+        {% endif %}
+    </div>
+</div>
+
+<!-- MAIN SECTION -->
+<div class="main">
+    <div class="card">
+
+        <h1>🔗 URL Intelligence Scanner</h1>
+        <p>Check if a URL is safe or malicious using AI analysis.</p>
+
+        <form method="POST" action="/check_url">
+    <div class="url-input-box">
+        <span class="url-icon">🔗</span>
+        <input type="text" name="url" required placeholder="Enter URL (https://example.com)">
+    </div>
+
+    <button type="submit">🔍 Check URL</button>
+</form>
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+© 2026 PhishGuard AI
+</div>
+
+<!-- DROPDOWN SCRIPT -->
+<script>
+function toggleMenu() {
+    const menu = document.getElementById("dropdownMenu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+window.onclick = function(event) {
+    if (!event.target.closest('.user-menu')) {
+        const menu = document.getElementById("dropdownMenu");
+        if(menu) menu.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>
